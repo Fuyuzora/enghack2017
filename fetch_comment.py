@@ -30,10 +30,14 @@ def test():
 if __name__ == '__main__':
     test_users = ['ghostcheck', 'ViaGamma', 'rogueqd']
     # test()
-    ucomment = User(test_users[2])
+    # ucomment = User(test_users[2])
+    ucomment = User('the-realDonaldTrump')
     sent = Sentiment()
     for comment in ucomment.comments:
-        print(comment.body)
-        print("Score %d" % comment.score)
-        print(sent.get_sentiment(comment.body, comment.score))
+        if comment.score < 0:
+            print(comment.body)
+            print(sent.get_sentiment(comment.body, comment.score))
+            print("Score %d" % comment.score)
+            print("Score weighted %f" % Sentiment.score_func(comment.score))
+            print("Score nltk %f" % sent.get_compound())
 
