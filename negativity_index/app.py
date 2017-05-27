@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from .reddit_user import User
+from reddit_user import User
 
 
 app = Flask(__name__)
