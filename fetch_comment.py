@@ -7,7 +7,7 @@ class UserComment(object):
         reddit = praw.Reddit(client_id=config.app_id,
                              client_secret=config.app_secret,
                              user_agent=config.app_ua)
-        self._user = reddit.redditor('ViaGamma')
+        self._user = reddit.redditor(user)
         self._comments = self._user.comments.new(limit=None)
 
     @property
