@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from reddit_user import User
+
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -21,6 +21,6 @@ def redditID():
 
 @app.route('/<userID>', methods=['GET', 'POST'])
 def assholeIndex(userID=None):
-    rate = User.rate_of_negativeness(userID)
+    rate = reddit_user.User.rate_of_negativeness(userID)
     return render_template('asshole_index.html',
                            userID=userID, rateOfNegativeness=rate)

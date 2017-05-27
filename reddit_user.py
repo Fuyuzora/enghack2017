@@ -1,5 +1,6 @@
 # Created by Yuchen on 5/26/17.
 import praw
+
 import config
 from nltk_polarity_scores.nltk_polarity_scores import Sentiment
 
