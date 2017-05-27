@@ -18,11 +18,7 @@ class Sentiment(object):
         sid = SentimentIntensityAnalyzer()
 
         for sentence in sentences:
-            # print(sentence)
             ss = sid.polarity_scores(sentence)
-            sentence_polarity_score = [ss['compound'], ss['neg'], ss['neu'], ss['pos']]
-            # print('[compound, neg, neu, pos]')
-            # print(sentence_polarity_score)
             neg_score.append(ss['neg'])
             neu_score.append(ss['neu'])
             pos_score.append(ss['pos'])

@@ -26,11 +26,11 @@ class User(object):
             sum_t += 1
             if comment.score < 0:
                 sum_of_negative_comments += 1
-                # print(comment.body)
-                # print(sent.get_sentiment(comment.body, comment.score))
-                # print("Score %d" % comment.score)
-                # print("Score weighted %f" % Sentiment.score_func(comment.score))
-                # print("Score nltk %f" % sent.get_compound())
+                print(comment.body)
+                print(sent.get_sentiment(comment.body, comment.score))
+                print("Score %d" % comment.score)
+                print("Score weighted %f" % Sentiment.score_func(comment.score))
+                print("Score nltk %f" % sent.get_compound())
         return 1.0*sum_of_negative_comments/sum_t
 
 def test():
