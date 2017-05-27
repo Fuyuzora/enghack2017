@@ -23,7 +23,7 @@ def reddit_username():
 def negativity_index(username=None):
     percent = User.rate_of_negativeness(username)*100
 
-    if percent <= 0.1:
+    if percent <= 0.1/100:
         detailed_descrip = "Trustworthy"
     else:
         detailed_descrip = "Possible Troll" #Robert
