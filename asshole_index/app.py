@@ -1,6 +1,13 @@
-from flask import render_template, flash, redirect
-from app import app
-from .forms import IDForm
+from flask import Flask, render_template, flash, redirect
+from flask_wtf import Form
+from wtforms import StringField
+from wtforms.validators import DataRequired
+
+app = Flask(__name__)
+app.config.from_object('config')
+
+class IDForm(Form):
+    reddit = StringField('UserID', validators=[DataRequired()])
 
 @app.route('/', methods=['GET', 'POST'])
 def redditID():
