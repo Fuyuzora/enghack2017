@@ -21,6 +21,20 @@ def reddit_username():
 
 @app.route('/<username>', methods=['GET', 'POST'])
 def negativity_index(username=None):
-    rate = User.rate_of_negativeness(username)
+    percent = User.rate_of_negativeness(username)*100
+
+    if percent <= 0.1:
+        detailed_descrip = "Trustworthy"
+    else:
+        detailed_descrip = "Possible Troll" #Robert
+
+
+
+    precent_str = "%f %%" % percent
+    # python bug
+    ## rate = User.rate_of_negativeness(username)
+    ## precent_str = "%f %%" % precent*100
     return render_template('asshole_index.html',
-                           username=username, rateOfNegativeness=rate)
+                           username=username,
+                           rateOfNegativeness=precent_str,
+                           description=detailed_descrip)
