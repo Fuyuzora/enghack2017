@@ -1,6 +1,6 @@
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk import tokenize
-import numpy as np
+import math
 
 class Sentiment(object):
 
@@ -9,7 +9,7 @@ class Sentiment(object):
     def __init__(self):
         self._compound_score = []
 
-    def analyze(self, paragraph):
+    def _analyze(self, paragraph):
         neg_score = []
         neu_score = []
         pos_score = []
@@ -28,13 +28,18 @@ class Sentiment(object):
             self._compound_score.append(ss['compound'])
 
     def get_compound(self):
-        # return sum(self._compound_score)/float(len(self._compound_score))
-        return sum(self._compound_score)
+        return sum(self._compound_score)/float(len(self._compound_score))
 
-    def get_sentiment(self):
-        if self.get_compound() >= 0.5:
+    def get_sentiment(self, paragraph, score, a=-0.801, b=18.1):
+        self._analyze(paragraph)
+        if score != 0:
+            weighted_score = (score/abs(score)) * (a*math.log(abs(score)) + b)/b
+        else:
+            weighted_score = 0
+
+        if self.get_compound() + weighted_score >= 0.1:
             return 1
-        elif self.get_compound() <= -0.5:
+        elif self.get_compound() + weighted_score <= -0.1:
             return -1
         else:
             return 0
@@ -47,5 +52,4 @@ if __name__ == '__main__':
                 "is awful. Does it change if i add more? I hate this. This is a awesome paragraph!"
 
     a = Sentiment()
-    a.analyze(paragraph)
-    print(a.get_sentiment())
+    print(a.get_sentiment(paragraph, 1))
