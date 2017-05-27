@@ -4,7 +4,6 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 from reddit_user import User
 
-
 app = Flask(__name__)
 app.config.from_object('config')
 
@@ -15,13 +14,13 @@ class IDForm(FlaskForm):
 def reddit_username():
     form = IDForm()
     if form.is_submitted():
-        return redirect(url_for('assholeIndex', username=form.reddit.data))
+        return redirect(url_for('negativity_index', username=form.reddit.data))
     return render_template('index.html',
                            title='enter username',
                            form=form)
 
 @app.route('/<username>', methods=['GET', 'POST'])
-def assholeIndex(username=None):
+def negativity_index(username=None):
     rate = User.rate_of_negativeness(username)
     return render_template('asshole_index.html',
                            username=username, rateOfNegativeness=rate)

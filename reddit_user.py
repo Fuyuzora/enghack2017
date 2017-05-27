@@ -1,15 +1,15 @@
 # Created by Yuchen on 5/26/17.
 import praw
 
-import config
+import redditapp_config
 from nltk_polarity_scores.nltk_polarity_scores import Sentiment
 
 
 class User(object):
     def __init__(self, user):
-        reddit = praw.Reddit(client_id=config.app_id,
-                             client_secret=config.app_secret,
-                             user_agent=config.app_ua)
+        reddit = praw.Reddit(client_id=redditapp_config.app_id,
+                             client_secret=redditapp_config.app_secret,
+                             user_agent=redditapp_config.app_ua)
         self._user = reddit.redditor(user)
 
     @property
@@ -34,9 +34,9 @@ class User(object):
         return 1.0*sum_of_negative_comments/sum_t
 
 def test():
-    reddit = praw.Reddit(client_id=config.app_id,
-                         client_secret=config.app_secret,
-                         user_agent=config.app_ua)
+    reddit = praw.Reddit(client_id=redditapp_config.app_id,
+                         client_secret=redditapp_config.app_secret,
+                         user_agent=redditapp_config.app_ua)
     for submission in reddit.subreddit('learnpython').hot(limit=10):
         print(submission.author)
 
